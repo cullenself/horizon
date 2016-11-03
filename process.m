@@ -1,4 +1,4 @@
-function [ locMat ] = process( t, directory, format )
+function [ locMat ] = process( file, directory )
 % process - helper function called to ingest a txinfo.mat file
 %		and return a matrix ready to pass to plotsat
 %
@@ -17,7 +17,7 @@ function [ locMat ] = process( t, directory, format )
 %		azn  eln
 
 % Find out which satellites were actually observed
-dat = load([directory '/' sprintf(format,t)]);
+dat = load([directory '/' file]);
 txinfo = dat.txinfo';
 % data.sats = unique(txinfo(:,8));
 n = size(txinfo,1);

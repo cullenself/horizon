@@ -5,22 +5,22 @@
 
 clear; close all; clc;
 % File storage information
-directory = 'txfiles';
+directory = 'GridData';
+outdir = 'outfiles';
 D = dir([directory,'/*.mat']);
 count = length(D(not([D.isdir])));
-format = 'txinfo%d.mat';
 outfile = 'locMat';
 picfile = 'horizon.png';
-daz = 1;
-del = 1;
+daz = .1;
+del = .1;
 % process each txinfo.mat to return list of times, sats, and pos data
-parfor i = 1:count
+parfor i = 1:size(D,1)
     disp(sprintf('Processing Data Set %d\n',i));
-    locMat(i,:,:) = process(i,directory,format);
-    img(i,:,:) = skyview(squeeze(locMat(i,:,:)),daz,del);
+    locMat{i,:,:} = process(D(i).name,directory);
+    img(i,:,:) = skyview(squeeze(locMat{i,:,:}),daz,del);
 end
 % Add all images together
-finalImage = squeeze(sum(img,1));
+finalImage = rot90(squeeze(sum(img,1)));
 % Output
-save([outfile datestr(now,'mmdd_HHMM')],'locMat','img','-v7.3');
+save([outdir '/' outfile datestr(now,'mmdd_HHMM')],'locMat','img','-v7.3');
 imwrite(finalImage,picfile);
