@@ -11,8 +11,8 @@ D = dir([directory,'/*.mat']);
 count = length(D(not([D.isdir])));
 outfile = 'locMat';
 picfile = 'horizon.png';
-daz = .1;
-del = .1;
+daz = .05;
+del = .05;
 % process each txinfo.mat to return list of times, sats, and pos data
 parfor i = 1:size(D,1)
     disp(sprintf('Processing Data Set %d\n',i));
