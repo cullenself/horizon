@@ -1,8 +1,12 @@
 Todo:
-cut data down to verify
-set up easy push/pull from dev to test
-add intermediate status markers
-process data in O(n) rather than O(n^2)
+Nothing! Currently as good as possible
+Need more data and physical view to verify generated horizon
+Possible: generate elevation mask from data
+
++cut data down to verify
++set up easy push/pull from dev to test
++add intermediate status markers
++process data in O(n) rather than O(n^2)
 	(could do by reimplementing plotsat to just ingest straight az-el data)
 WIP:
-change plotsat to skyview and implement
++change plotsat to skyview and implement
