@@ -1,0 +1,7 @@
+Todo:
+cut data down to verify
+set up easy push/pull from dev to test
+add intermediate status markers
+process data in O(n) rather than O(n^2)
+	(could do by reimplementing plotsat to just ingest straight az-el data)
+
