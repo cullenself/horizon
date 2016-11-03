@@ -11,8 +11,8 @@ count = length(D(not([D.isdir])));
 format = 'txinfo%d.mat';
 outfile = 'locMat';
 picfile = 'horizon.png';
-daz = 0.01;
-del = 0.01;
+daz = 1;
+del = 1;
 % process each txinfo.mat to return list of times, sats, and pos data
 parfor i = 1:count
     disp(sprintf('Processing Data Set %d\n',i));
@@ -22,5 +22,5 @@ end
 % Add all images together
 finalImage = squeeze(sum(img,1));
 % Output
-save([outfile datestr(now,'mmdd_HHMM')],'locMat'); % this line has never been executed
+save([outfile datestr(now,'mmdd_HHMM')],'locMat','img','-v7.3');
 imwrite(finalImage,picfile);
