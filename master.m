@@ -9,30 +9,18 @@ directory = 'txfiles';
 D = dir([directory,'/*.mat']);
 count = length(D(not([D.isdir])));
 format = 'txinfo%d.mat';
-outfile = 'plotMat';
+outfile = 'locMat';
+picfile = 'horizon.png';
+daz = 0.01;
+del = 0.01;
 % process each txinfo.mat to return list of times, sats, and pos data
 parfor i = 1:count
-    plotMat(i,:,:) = process(i,directory,format);
+    disp(sprintf('Processing Data Set %d\n',i));
+    locMat(i,:,:) = process(i,directory,format);
+    img(i,:,:) = skyview(squeeze(locMat(i,:,:)),daz,del);
 end
-% Old data processing - yet another reason to rewrite plotsat
-% times = [data.times];
-% sats = unique([data.sats]);
-% Nsv = numel(sats);
-% plotMat = zeros(count,numel(times)*numel(sats),4);
-% for i = 1:count
-%     for t = 1:size(data(i).times)
-%         for s = 1:Nsv
-%             n = find([data(i).pos([data(i).pos.time] == data(i).times(t)).SVID] == sats(s));
-%             if ~isempty(n)
-%                 elRad = deg2rad(data(i).pos(n(1)).el);
-%                 azRad = deg2rad(data(i).pos(n(1)).az);
-%             else
-%                 elRad = 0;
-%                 azRad = 0;
-%             end
-%             plotMat(i,(t-1)*Nsv+s,:) = [sats(s), data(i).times(t), elRad, azRad];
-%         end
-%     end
-% end
-save([outfile datestr(now,'mmdd_HHMM')],'plotMat'); % this line has never been executed
-plotsat(plotMat(1,:,:),1920,0);
+% Add all images together
+finalImage = squeeze(sum(img,1));
+% Output
+save([outfile datestr(now,'mmdd_HHMM')],'locMat'); % this line has never been executed
+imwrite(finalImage,picfile);
