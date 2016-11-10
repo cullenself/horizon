@@ -1,7 +1,6 @@
 % master.m - script that runs long term visualization of satellite data
 %	     by plotting every satellite observation as a pixel in the sky,
-%	     hopefully showing the horizon surrounding the antenna.
-%            Currently a work in progress.
+%	     showing the horizon surrounding the antenna.
 
 clear; close all; clc;
 % File storage information

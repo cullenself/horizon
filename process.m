@@ -3,8 +3,7 @@ function [ locMat ] = process( file, directory )
 %		and return a matrix ready to pass to plotsat
 %
 % Inputs:
-%    t - variable that defines which file to read
-%    format - how the log file names are formatted
+%    file - what file to read
 %    directory - string, where the log files are stored
 %
 % Outputs:
